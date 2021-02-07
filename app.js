@@ -1,10 +1,11 @@
 const search = document.getElementById("search"),
   submit = document.getElementById("submit"),
+  random = document.getElementById("random"),
   mealsEl = document.getElementById("meals"),
   resultHeading = document.getElementById("result-heading"),
   single_mealEl = document.getElementById("single-meal");
-function searchMeal(e) {
-  e.preventDefault();
+function searchMeal(event) {
+  event.preventDefault();
   single_mealEl.innerHTML = "";
   const term = search.value;
   console.log(term);
@@ -15,7 +16,7 @@ function searchMeal(e) {
         console.log(data);
         resultHeading.innerHTML = `<h2>Search results for '${term}':</h2>`;
         if (data.meals === null) {
-          resultHeading.innerHTML = `<p>Sorry ,, There are no Food in your search results. Try again!</p>`;
+          resultHeading.innerHTML = `<p>Sorry ,, There are no search results. Try again!</p>`;
         } else {
           mealsEl.innerHTML = data.meals
             .map(
@@ -82,8 +83,8 @@ function addMealToDOM(meal) {
 }
 submit.addEventListener("submit", searchMeal);
 random.addEventListener("click", getRandomMeal);
-mealsEl.addEventListener("click", (e) => {
-  const mealInfo = e.path.find((item) => {
+mealsEl.addEventListener("click", (event) => {
+  const mealInfo = event.path.find((item) => {
     if (item.classList) {
       return item.classList.contains("meal-info");
     } else {
